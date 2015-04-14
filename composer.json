@@ -1,0 +1,27 @@
+{
+    "name": "yocmen/html-minify",
+    "description": "Minifies the HTML output of Laravel 5 applications (Originally from https://github.com/fitztrev/laravel-html-minify)",
+    "keywords": ["laravel", "l5", "html", "optimization", "performance", "compress", "minify", "minifier", "blade"],
+    "homepage": "https://github.com/yocmen/html-minify",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yocsel Mendoza",
+            "email": "yocmen@gmail.com"
+        },
+        {
+            "name": "Trevor Fitzgerald",
+            "email": "fitztrev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Yocmen\\HtmlMinify": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

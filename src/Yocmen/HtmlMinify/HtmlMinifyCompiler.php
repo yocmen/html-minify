@@ -1,0 +1,90 @@
+<?php namespace Yocmen\HtmlMinify;
+
+use Illuminate\View\Compilers\BladeCompiler;
+
+class HtmlMinifyCompiler extends BladeCompiler
+{
+    private $_config;
+
+    public function __construct($config, $files, $cachePath)
+    {
+        parent::__construct($files, $cachePath);
+
+        $this->_config = $config;
+
+        // Add Minify to the list of compilers
+        if ($this->_config['enabled'] === true) {
+            $this->compilers[] = 'Minify';
+        }
+
+        // Set Blade contentTags and escapedContentTags
+		$this->setRawTags(
+            $this->_config['blade']['rawTags'][0],
+            $this->_config['blade']['rawTags'][1]
+        );
+		
+        $this->setContentTags(
+            $this->_config['blade']['contentTags'][0],
+            $this->_config['blade']['contentTags'][1]
+        );
+	
+        $this->setEscapedContentTags(
+            $this->_config['blade']['escapedContentTags'][0],
+            $this->_config['blade']['escapedContentTags'][1]
+        );
+		
+    }
+
+    /**
+    * We'll only compress a view if none of the following conditions are met.
+    * 1) <pre> or <textarea> tags
+    * 2) Embedded javascript (opening <script> tag not immediately followed
+    * by </script>)
+    * 3) Value attribute that contains 2 or more adjacent spaces
+    *
+    * @param string $value the contents of the view file
+    *
+    * @return bool
+    */
+    protected function shouldMinify($value)
+    {
+        if (preg_match('/skipmin/', $value)
+         || preg_match('/<(pre|textarea)/', $value)
+         || preg_match('/<script[^\??>]*>[^<\/script>]/', $value)
+         || preg_match('/value=("|\')(.*)([ ]{2,})(.*)("|\')/', $value)
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+    * Compress the HTML output before saving it
+    *
+    * @param string $value the contents of the view file
+    *
+    * @return string
+    */
+    protected function compileMinify($value)
+    {
+        if ($this->shouldMinify($value)) {
+            $replace = [
+                '/<!--[^\[](.*?)[^\]]-->/s' => '',
+                "/<\?php/"                  => '<?php ',
+                "/\n([\S])/"                => ' $1',
+                "/\r/"                      => '',
+                "/\n/"                      => '',
+                "/\t/"                      => ' ',
+                "/ +/"                      => ' ',
+                "/>\s</"                    => '><'
+            ];
+
+            return preg_replace(
+                array_keys($replace), array_values($replace), $value
+            );
+        } else {
+            return $value;
+        }
+    }
+}
