@@ -28,6 +28,7 @@ Test Page | w/o Gzip | w/ Gzip | w/ Gzip + Laravel HTML Minify
 ### Options
 
 - **`enabled`** - *boolean*, default **true**
+- **`comment_stripping`** - *boolean*, default **true**
 
 If you are using a javascript framework that conflicts with Blade's tags, you can change them.
 
