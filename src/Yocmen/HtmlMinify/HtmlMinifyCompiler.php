@@ -70,7 +70,6 @@ class HtmlMinifyCompiler extends BladeCompiler
     {
         if ($this->shouldMinify($value)) {
             $replace = [
-                '/<!--[^\[](.*?)[^\]]-->/s' => '',
                 "/<\?php/"                  => '<?php ',
                 "/\n([\S])/"                => ' $1',
                 "/\r/"                      => '',
@@ -79,6 +78,9 @@ class HtmlMinifyCompiler extends BladeCompiler
                 "/ +/"                      => ' ',
                 "/>\s</"                    => '><'
             ];
+
+            if($this->_config['comment_stripping'])
+                $replace['/<!--[^\[](.*?)[^\]]-->/s'] = '';
 
             return preg_replace(
                 array_keys($replace), array_values($replace), $value

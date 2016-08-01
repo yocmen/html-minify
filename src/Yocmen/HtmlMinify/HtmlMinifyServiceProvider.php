@@ -27,7 +27,7 @@ class HtmlMinifyServiceProvider extends ServiceProvider {
 	{
         $app = $this->app;
         $app->view->getEngineResolver()->register(
-            'blade.php',
+            'blade',
             function () use ($app) {
                 $cachePath = storage_path().'/framework/views';
                 $compiler  = new HtmlMinifyCompiler(
@@ -39,7 +39,6 @@ class HtmlMinifyServiceProvider extends ServiceProvider {
                 return new CompilerEngine($compiler);
             }
         );
-        $app->view->addExtension('blade.php', 'blade.php');
 	}
 
 	/**
