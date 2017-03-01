@@ -15,24 +15,7 @@ class HtmlMinifyCompiler extends BladeCompiler
         // Add Minify to the list of compilers
         if ($this->_config['enabled'] === true) {
             $this->compilers[] = 'Minify';
-        }
-
-        // Set Blade contentTags and escapedContentTags
-		$this->setRawTags(
-            $this->_config['blade']['rawTags'][0],
-            $this->_config['blade']['rawTags'][1]
-        );
-		
-        $this->setContentTags(
-            $this->_config['blade']['contentTags'][0],
-            $this->_config['blade']['contentTags'][1]
-        );
-	
-        $this->setEscapedContentTags(
-            $this->_config['blade']['escapedContentTags'][0],
-            $this->_config['blade']['escapedContentTags'][1]
-        );
-		
+        }		
     }
 
     /**
