@@ -18,7 +18,7 @@ Test Page | w/o Gzip | w/ Gzip | w/ Gzip + Laravel HTML Minify
 
 ## Installation
 
-1. Add `"yocmen/html-minify": "2.*"` to **composer.json**.
+1. Add `"yocmen/html-minify": "dev-Laravel-5.4"` to **composer.json**.
 2. Run `composer update`
 3. Add `Yocmen\HtmlMinify\HtmlMinifyServiceProvider` to the list of providers in **config/app.php**.
 4. Publish your config with `php artisan vendor:publish` command
