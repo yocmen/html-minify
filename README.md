@@ -1,4 +1,4 @@
-# Laravel 5 HTML Minify
+# Laravel 5.4 HTML Minify
 This package is originally from https://github.com/fitztrev/laravel-html-minify i just updated the package and made it compatible with laravel 5.
 
 ## About
@@ -29,12 +29,6 @@ Test Page | w/o Gzip | w/ Gzip | w/ Gzip + Laravel HTML Minify
 
 - **`enabled`** - *boolean*, default **true**
 - **`comment_stripping`** - *boolean*, default **true**
-
-If you are using a javascript framework that conflicts with Blade's tags, you can change them.
-
-- **`blade.rawTags`** - *array*, default `{!!` and `!!}`
-- **`blade.contentTags`** - *array*, default `{{` and `}}`
-- **`blade.escapedContentTags`** - *array*, default `{{{` and `}}}`
 
 #### Skipping minification
 
